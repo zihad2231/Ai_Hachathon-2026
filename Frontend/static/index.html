@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpayPulse | Enterprise Churn Intelligence & NBA Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <!-- Header Ribbon -->
+        <div class="glass-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-wrap justify-between items-center gap-4 shadow-xl">
+            <div class="space-y-1">
+                <div class="flex items-center space-x-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span> RANDOM FOREST ACTIVE (AUC 0.95)
+                    </span>
+                    <span class="text-xs font-semibold text-slate-400">• Team The Entropy Core</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">UpayPulse Intelligence & NBA Engine</h1>
+                <p class="text-xs md:text-sm text-slate-400">Real-time fintech customer telemetry inference across 15 behavioral signals.</p>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button type="button" onclick="loadPersona('high_risk')" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/30 hover:bg-rose-500/20 transition">
+                    ⚠️ Load High-Risk Persona
+                </button>
+                <button type="button" onclick="loadPersona('loyal')" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition">
+                    ✅ Load Active Persona
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Body -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left Form Panel (15 Signals) -->
+            <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>⚙️</span> Customer Telemetry Matrix (15 Signals)
+                    </h2>
+                    <span class="text-xs text-slate-400">Live Sync</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    
+                    <!-- Demographic Group -->
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Customer Age</label>
+                        <input type="number" id="Age" value="24" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Gender</label>
+                        <select id="Gender" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="Female" selected>Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Tenure (Account Age Months)</label>
+                        <input type="number" id="AccountAgeMonths" value="12" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Life Stage Segment</label>
+                        <select id="LifeStageSegment" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="Student/Youth" selected>Student/Youth</option>
+                            <option value="Working Professional">Working Professional</option>
+                            <option value="Family/Mature">Family/Mature</option>
+                        </select>
+                    </div>
+
+                    <!-- Usage Features -->
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Preferred Category</label>
+                        <select id="PreferredCategory" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="Send Money" selected>Send Money</option>
+                            <option value="Mobile Recharge">Mobile Recharge</option>
+                            <option value="Merchant Payment">Merchant Payment</option>
+                            <option value="Cash-Out">Cash-Out</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Weekly App Opens</label>
+                        <input type="number" id="AppOpenFreqWeekly" value="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Monthly Txn Volume</label>
+                        <input type="number" id="AvgMonthlyTransactions" value="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Avg Txn Amount (৳)</label>
+                        <input type="number" step="0.1" id="AvgTransactionAmount" value="450.0" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <!-- Friction & Health -->
+                    <div class="space-y-1">
+                        <label class="font-semibold text-rose-300">Support Tickets (90d)</label>
+                        <input type="number" id="SupportTicketsCount" value="4" class="w-full bg-slate-800 border border-rose-500/40 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Cash-In vs Cash-Out Ratio</label>
+                        <input type="number" step="0.01" id="CashInVsCashOutRatio" value="0.45" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Bill Payment Frequency</label>
+                        <input type="number" id="BillPaymentFrequency" value="0" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-rose-300">Failed Txn Count</label>
+                        <input type="number" id="FailedTransactionCount" value="3" class="w-full bg-slate-800 border border-rose-500/40 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">Discounts Redeemed</label>
+                        <input type="number" id="DiscountsRedeemedLastQuarter" value="0" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-semibold text-slate-300">App Version Up-To-Date</label>
+                        <select id="AppVersionUpToDate" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="1">Yes (1)</option>
+                            <option value="0" selected>No (0)</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2 space-y-1">
+                        <label class="font-semibold text-amber-300">Dormancy: Days Since Last Transaction</label>
+                        <input type="number" id="DaysSinceLastTransaction" value="42" class="w-full bg-slate-800 border border-amber-500/40 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="button" onclick="executeInference()" id="submitBtn" class="w-full py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:opacity-90 font-bold rounded-xl text-white shadow-lg transition tracking-wide text-sm flex items-center justify-center space-x-2">
+                        <span>⚡ Run Telemetry Risk Inference</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Analytics Output Panel -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- Probability & NBA Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- Churn Card -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-2">
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Churn Risk Probability</span>
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-4xl font-extrabold text-white" id="churnDisplay">--%</span>
+                        </div>
+                        <div id="riskBadge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-400">
+                            INITIALIZING...
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 mt-2 overflow-hidden">
+                            <div id="riskBar" class="h-2.5 w-0 transition-all duration-700 bg-blue-500"></div>
+                        </div>
+                    </div>
+
+                    <!-- NBA Card -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-2">
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Algorithmic NBA Offer</span>
+                        <div class="text-base font-bold text-emerald-400 min-h-[48px] flex items-center" id="nbaDisplay">
+                            --
+                        </div>
+                        <div class="text-[11px] font-semibold text-emerald-500/80 flex items-center">
+                            ↑ +65% High-Conversion Lift
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- XAI Drivers (SHAP Proxy Weights) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">SHAP Explainability: Top Friction Signals</h3>
+                        <span class="text-[10px] text-cyan-400 font-semibold">15 Features Evaluated</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <div class="flex justify-between text-slate-300 mb-1 font-medium">
+                                <span>Support Friction & Gateway Failures</span>
+                                <span id="valSupport" class="font-bold text-rose-400">--%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="barSupport" class="bg-rose-500 h-2 transition-all duration-500 w-0"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-slate-300 mb-1 font-medium">
+                                <span>Transactional Dormancy (Days Inactive)</span>
+                                <span id="valDormancy" class="font-bold text-amber-400">--%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="barDormancy" class="bg-amber-500 h-2 transition-all duration-500 w-0"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-slate-300 mb-1 font-medium">
+                                <span>Weekly App Open Decay</span>
+                                <span id="valDecay" class="font-bold text-indigo-400">--%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="barDecay" class="bg-indigo-500 h-2 transition-all duration-500 w-0"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-slate-300 mb-1 font-medium">
+                                <span>Cash-In / Cash-Out Imbalance</span>
+                                <span id="valBalance" class="font-bold text-cyan-400">--%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="barBalance" class="bg-cyan-500 h-2 transition-all duration-500 w-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automated Campaign Trigger -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-2">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Automated Execution Strategy</span>
+                    <p id="strategyDisplay" class="text-xs text-slate-300 leading-relaxed font-medium bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+                        Inference in progress...
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        async function executeInference() {
+            const btn = document.getElementById("submitBtn");
+            btn.innerHTML = "<span>⚙️ Computing Probabilities...</span>";
+            btn.disabled = true;
+
+            const payload = {
+                Age: parseInt(document.getElementById("Age").value) || 25,
+                Gender: document.getElementById("Gender").value,
+                AccountAgeMonths: parseInt(document.getElementById("AccountAgeMonths").value) || 12,
+                LifeStageSegment: document.getElementById("LifeStageSegment").value,
+                PreferredCategory: document.getElementById("PreferredCategory").value,
+                AppOpenFreqWeekly: parseInt(document.getElementById("AppOpenFreqWeekly").value) || 0,
+                AvgMonthlyTransactions: parseInt(document.getElementById("AvgMonthlyTransactions").value) || 0,
+                AvgTransactionAmount: parseFloat(document.getElementById("AvgTransactionAmount").value) || 100.0,
+                SupportTicketsCount: parseInt(document.getElementById("SupportTicketsCount").value) || 0,
+                CashInVsCashOutRatio: parseFloat(document.getElementById("CashInVsCashOutRatio").value) || 1.0,
+                BillPaymentFrequency: parseInt(document.getElementById("BillPaymentFrequency").value) || 0,
+                FailedTransactionCount: parseInt(document.getElementById("FailedTransactionCount").value) || 0,
+                DiscountsRedeemedLastQuarter: parseInt(document.getElementById("DiscountsRedeemedLastQuarter").value) || 0,
+                AppVersionUpToDate: parseInt(document.getElementById("AppVersionUpToDate").value) || 0,
+                DaysSinceLastTransaction: parseInt(document.getElementById("DaysSinceLastTransaction").value) || 1
+            };
+
+            try {
+                const res = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!res.ok) throw new Error("Server responded with error " + res.status);
+                const data = await res.json();
+
+                // 1. Churn Displays
+                document.getElementById("churnDisplay").innerText = data.churn_probability + "%";
+                const bar = document.getElementById("riskBar");
+                const badge = document.getElementById("riskBadge");
+
+                bar.style.width = data.churn_probability + "%";
+                badge.innerText = data.risk_tier;
+
+                if (data.color_theme === "red") {
+                    bar.className = "h-2.5 transition-all duration-700 bg-rose-500";
+                    badge.className = "inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                } else if (data.color_theme === "amber") {
+                    bar.className = "h-2.5 transition-all duration-700 bg-amber-500";
+                    badge.className = "inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/30";
+                } else {
+                    bar.className = "h-2.5 transition-all duration-700 bg-emerald-500";
+                    badge.className = "inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                }
+
+                // 2. NBA & Strategy
+                document.getElementById("nbaDisplay").innerText = data.next_best_action;
+                document.getElementById("strategyDisplay").innerText = data.execution_strategy;
+
+                // 3. XAI Drivers
+                document.getElementById("barSupport").style.width = data.telemetry_drivers.support_friction + "%";
+                document.getElementById("valSupport").innerText = data.telemetry_drivers.support_friction + "%";
+
+                document.getElementById("barDormancy").style.width = data.telemetry_drivers.inactivity_score + "%";
+                document.getElementById("valDormancy").innerText = data.telemetry_drivers.inactivity_score + "%";
+
+                document.getElementById("barDecay").style.width = data.telemetry_drivers.engagement_decay + "%";
+                document.getElementById("valDecay").innerText = data.telemetry_drivers.engagement_decay + "%";
+
+                document.getElementById("barBalance").style.width = data.telemetry_drivers.monetary_imbalance + "%";
+                document.getElementById("valBalance").innerText = data.telemetry_drivers.monetary_imbalance + "%";
+
+            } catch (err) {
+                console.error(err);
+                alert("Prediction Error: " + err.message);
+            } finally {
+                btn.innerHTML = "<span>⚡ Run Telemetry Risk Inference</span>";
+                btn.disabled = false;
+            }
+        }
+
+        function loadPersona(type) {
+            if(type === 'high_risk') {
+                document.getElementById("Age").value = 24;
+                document.getElementById("Gender").value = "Female";
+                document.getElementById("AccountAgeMonths").value = 12;
+                document.getElementById("LifeStageSegment").value = "Student/Youth";
+                document.getElementById("PreferredCategory").value = "Send Money";
+                document.getElementById("AppOpenFreqWeekly").value = 1;
+                document.getElementById("AvgMonthlyTransactions").value = 2;
+                document.getElementById("AvgTransactionAmount").value = 350.0;
+                document.getElementById("SupportTicketsCount").value = 4;
+                document.getElementById("CashInVsCashOutRatio").value = 0.35;
+                document.getElementById("BillPaymentFrequency").value = 0;
+                document.getElementById("FailedTransactionCount").value = 4;
+                document.getElementById("DiscountsRedeemedLastQuarter").value = 0;
+                document.getElementById("AppVersionUpToDate").value = 0;
+                document.getElementById("DaysSinceLastTransaction").value = 48;
+            } else {
+                document.getElementById("Age").value = 32;
+                document.getElementById("Gender").value = "Male";
+                document.getElementById("AccountAgeMonths").value = 28;
+                document.getElementById("LifeStageSegment").value = "Working Professional";
+                document.getElementById("PreferredCategory").value = "Mobile Recharge";
+                document.getElementById("AppOpenFreqWeekly").value = 14;
+                document.getElementById("AvgMonthlyTransactions").value = 22;
+                document.getElementById("AvgTransactionAmount").value = 1450.0;
+                document.getElementById("SupportTicketsCount").value = 0;
+                document.getElementById("CashInVsCashOutRatio").value = 1.15;
+                document.getElementById("BillPaymentFrequency").value = 3;
+                document.getElementById("FailedTransactionCount").value = 0;
+                document.getElementById("DiscountsRedeemedLastQuarter").value = 4;
+                document.getElementById("AppVersionUpToDate").value = 1;
+                document.getElementById("DaysSinceLastTransaction").value = 2;
+            }
+            executeInference();
+        }
+
+        // Auto-run on initial load
+        window.onload = () => executeInference();
+    </script>
